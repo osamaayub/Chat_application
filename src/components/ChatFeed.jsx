@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
-
 import MyMessage from "./MyMessage";
 import TheirMessage from "./TheirMessage";
 import MessageForm from "./MessageForm";
@@ -25,7 +21,6 @@ const ChatFeed = (props) => {
 
     const renderMessage = () => {
         const keys = Object.keys(messages);
-
 
         return keys.map((key, index) => {
             const message = messages[key];
@@ -64,23 +59,17 @@ const ChatFeed = (props) => {
                 <div className="chat-title{chat.title}">
                     <div className="chat-subtitle">
                         {chat.people.map((person) => {
-                            `${person.person.userName}`
-                        })}
-
+                            return <span>`${person.person.userName}`</span>
+                        })
+                        }
                     </div>
-
                 </div>
                 {renderMessage()}
                 <div style={{ height: '100px' }} />
                 <div className="message-form-container">
                     <MessageForm {...props} chatId={activeChat} />
-
                 </div>
-
-
-
             </div>
-
         </div>
     )
 }
