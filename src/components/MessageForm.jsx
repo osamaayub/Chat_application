@@ -1,65 +1,64 @@
-
 import { useState } from "react"
-import {sendMessage,isTyping} from 'react-chat-engine';
-import {SendOutlined,PictureOutlined} from '@ant-design/icons';
+import { sendMessage, isTyping } from 'react-chat-engine';
+import { SendOutlined, PictureOutlined } from '@ant-design/icons';
 
 
 
 const MessageForm = (props) => {
-   
-    const [value,setValue]=useState('');
-    const {chatId,creds}=props;
-    
-    const handleSubmit=(event)=>{
+
+    const [value, setValue] = useState('');
+    const { chatId, creds } = props;
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const text=value.trim();
-        if(text.length>0) sendMessage(creds,chatId,{text});
+        const text = value.trim();
+        if (text.length > 0) sendMessage(creds, chatId, { text });
         setValue('')
 
     }
-    const handleUpload=(event)=>{
-        sendMessage(creds,chatId,{files:event.target.files,text:''})
+    const handleUpload = (event) => {
+        sendMessage(creds, chatId, { files: event.target.files, text: '' })
     }
 
-    const handleChange=(event)=>{
+    const handleChange = (event) => {
         setValue(event.target.value);
-        isTyping(props,chatId);
+        isTyping(props, chatId);
 
     }
 
-  return (
-    <form className="message-form" onSubmit={handleSubmit}>
-        <input 
-         className="message-input"
-         placeholder="Send a Message..."
-         value={value}
-         onChange={handleChange}
-         onSubmit={handleSubmit}
-        />
-        <label htmlFor="upload-button">
-            <span className="image-button">
-                <PictureOutlined
-                  className="picture-icon"
-                
-                />
-            </span>
-        </label>
-        <input 
-           type="file"
-           multiple={false}
-           id="upload-button"
-           style={{display:'none'}}
-           onChange={handleUpload}
-        />
+    return (
+        <form className="message-form" onSubmit={handleSubmit}>
+            <input
+                className="message-input"
+                placeholder="Send a Message..."
+                value={value}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+            />
+            <label htmlFor="upload-button">
+                <span className="image-button">
+                    <PictureOutlined
+                        className="picture-icon"
 
-        <button type='submit' className='send-button'>
+                    />
+                </span>
+            </label>
+            <input
+                type="file"
+                multiple={false}
+                id="upload-button"
+                style={{ display: 'none' }}
+                onChange={handleUpload}
+            />
 
-             <SendOutlined className='send_icon'  />
-        </button>
+            <button type='submit' className='send-button'>
 
-    </form>
+                <SendOutlined className='send_icon' />
+            </button>
 
-  )
+        </form>
+
+    )
 }
 
 export default MessageForm
